@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Hash Wallet",
+  "short_name": "HW",
+  "version": "0.1.0",
+  "description": "A crypto wallet for web3 development",
+  "homepage_url": "https://github.com/anuprshetty/hash_wallet",
+  "action": {
+    "default_icon": {
+      "16": "hash_wallet.png",
+      "24": "hash_wallet.png",
+      "32": "hash_wallet.png",
+      "48": "hash_wallet.png",
+      "128": "hash_wallet.png"
+    },
+    "default_title": "Hash Wallet",
+    "default_popup": "index.html"
+  }
+}

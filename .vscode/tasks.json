@@ -1,0 +1,54 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+
+  // See https://code.visualstudio.com/docs/editor/variables-reference
+  // for available variables which can be used in tasks.json, launch.json and settings.json files.
+
+  "version": "2.0.0",
+  "type": "shell",
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated", // options: 'dedicated', 'shared'
+    "showReuseMessage": false // Controls whether to show the "Terminal will be reused by tasks, press any key to close it" message.
+  },
+
+  "tasks": [
+    {
+      "label": "hash_wallet->prerequisites->npm_install",
+      "command": "npm install"
+    },
+    {
+      "label": "hash_wallet->prerequisites->npm_cleanup",
+      "command": "rm -rf node_modules/ package-lock.json"
+    },
+    {
+      "label": "hash_wallet->prerequisites->npm_reset",
+      "dependsOrder": "sequence", // by default, "parallel"
+      "dependsOn": [
+        "hash_wallet->prerequisites->npm_cleanup",
+        "hash_wallet->prerequisites->npm_install"
+      ]
+    },
+    {
+      "label": "atomic_tasks->hash_wallet->debug",
+      "command": "npm run debug",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "hash_wallet->build",
+      "command": "npm run build"
+    },
+    {
+      "label": "hash_wallet->run_on->local->on_env->dev",
+      "command": "npm run start"
+    },
+    {
+      "label": "hash_wallet->run_on->local->on_env->prod",
+      "command": "serve --listen tcp://127.0.0.1:8080 --no-port-switching --single --debug build",
+      "dependsOrder": "sequence",
+      "dependsOn": ["hash_wallet->build"]
+    }
+  ]
+}
