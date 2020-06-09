@@ -41,6 +41,10 @@
       "command": "npm run build"
     },
     {
+      "label": "hash_wallet->launch_extension",
+      "command": "open -a 'Google Chrome' 'chrome-extension://${input:extension_id}/index.html'"
+    },
+    {
       "label": "hash_wallet->run_on->local->on_env->dev",
       "command": "npm run start"
     },
@@ -49,6 +53,14 @@
       "command": "serve --listen tcp://127.0.0.1:8080 --no-port-switching --single --debug build",
       "dependsOrder": "sequence",
       "dependsOn": ["hash_wallet->build"]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "extension_id",
+      "type": "promptString",
+      "description": "Enter <extension_id>",
+      "default": "hhgpojeekghgnphnokjeeadmjpbmkeke"
     }
   ]
 }
