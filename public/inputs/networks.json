@@ -1,0 +1,9 @@
+[
+  {
+    "name": "local_hardhat_network",
+    "rpc_url": "http://127.0.0.1/8545/",
+    "chain_id": "31337",
+    "currency_symbol": "ETH",
+    "block_explorer_url": "https://app.tryethernal.com/auth?next=%2Ftransactions"
+  }
+]
