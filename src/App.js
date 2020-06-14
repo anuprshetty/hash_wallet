@@ -68,7 +68,7 @@ export default class App extends Component {
           <div className="row">
             <div className="col-md-6 offset-md-3">
               <form
-                className="gradient my-5 p-2"
+                className="gradient my-2 p-2"
                 style={{
                   borderRadius: "25px",
                   boxShadow: "1px 1px 15px #000000",
@@ -81,7 +81,7 @@ export default class App extends Component {
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     {this.state.selectedNetwork
                       ? this.state.selectedNetwork.name
-                      : "Select blockchain network"}
+                      : "Network"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     {this.state.networks.map((network, index) => (
@@ -98,7 +98,7 @@ export default class App extends Component {
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     {this.state.selectedAccount
                       ? this.state.selectedAccount.name
-                      : "Select account"}
+                      : "Account"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     {this.state.accounts.map((account, index) => (
