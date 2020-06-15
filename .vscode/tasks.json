@@ -37,8 +37,12 @@
       "problemMatcher": []
     },
     {
-      "label": "hash_wallet->build",
+      "label": "hash_wallet->1.build",
       "command": "npm run build"
+    },
+    {
+      "label": "hash_wallet->2.watch",
+      "command": "npm run watch"
     },
     {
       "label": "hash_wallet->launch_extension",
