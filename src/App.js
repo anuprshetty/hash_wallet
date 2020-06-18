@@ -20,20 +20,40 @@ export default class App extends Component {
     var networks = await (await fetch("./inputs/networks.json")).json();
     console.log("networks: ", networks);
 
-    this.setState((prevState) => ({
-      ...prevState,
-      networks: networks,
-    }));
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        networks: networks,
+      }),
+      () => {
+        if (this.state.networks.length > 0) {
+          this.setState((prevState) => ({
+            ...prevState,
+            selectedNetwork: this.state.networks[0],
+          }));
+        }
+      }
+    );
   };
 
   fetchAccounts = async () => {
     var accounts = await (await fetch("./inputs/accounts.json")).json();
     console.log("accounts: ", accounts);
 
-    this.setState((prevState) => ({
-      ...prevState,
-      accounts: accounts,
-    }));
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        accounts: accounts,
+      }),
+      () => {
+        if (this.state.accounts.length > 0) {
+          this.setState((prevState) => ({
+            ...prevState,
+            selectedAccount: this.state.accounts[0],
+          }));
+        }
+      }
+    );
   };
 
   refreshNetwork = async (selectedNetwork) => {
@@ -78,7 +98,14 @@ export default class App extends Component {
                   Hash Wallet
                 </h1>
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle
+                    variant="dark"
+                    style={{
+                      fontWeight: "bold",
+                      margin: "5px",
+                      color: "#FFFFFF",
+                    }}
+                  >
                     {this.state.selectedNetwork
                       ? this.state.selectedNetwork.name
                       : "Network"}
@@ -95,7 +122,14 @@ export default class App extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle
+                    variant="dark"
+                    style={{
+                      fontWeight: "bold",
+                      margin: "5px",
+                      color: "#FFFFFF",
+                    }}
+                  >
                     {this.state.selectedAccount
                       ? this.state.selectedAccount.name
                       : "Account"}
