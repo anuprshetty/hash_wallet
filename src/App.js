@@ -97,7 +97,7 @@ export default class App extends Component {
                 <h1 style={{ fontWeight: 900, color: "#FFFFFF" }}>
                   Hash Wallet
                 </h1>
-                <Dropdown>
+                <Dropdown className="d-inline">
                   <Dropdown.Toggle
                     variant="dark"
                     style={{
@@ -110,18 +110,25 @@ export default class App extends Component {
                       ? this.state.selectedNetwork.name
                       : "Network"}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu
+                    variant="dark"
+                    style={{ maxHeight: "200px", overflowY: "scroll" }}
+                  >
                     {this.state.networks.map((network, index) => (
                       <Dropdown.Item
                         key={index}
+                        style={{ textAlign: "center" }}
                         onClick={() => this.refreshNetwork(network)}
                       >
-                        {network.name}
+                        <div>
+                          <p style={{ fontWeight: "bold" }}>{network.name}</p>
+                          <p>{network.rpc_url}</p>
+                        </div>
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown>
+                <Dropdown className="d-inline">
                   <Dropdown.Toggle
                     variant="dark"
                     style={{
@@ -134,13 +141,20 @@ export default class App extends Component {
                       ? this.state.selectedAccount.name
                       : "Account"}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu
+                    variant="dark"
+                    style={{ maxHeight: "200px", overflowY: "scroll" }}
+                  >
                     {this.state.accounts.map((account, index) => (
                       <Dropdown.Item
                         key={index}
+                        style={{ textAlign: "center" }}
                         onClick={() => this.refreshAccount(account)}
                       >
-                        {account.name}
+                        <div>
+                          <p style={{ fontWeight: "bold" }}>{account.name}</p>
+                          <p>{account.address}</p>
+                        </div>
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
