@@ -18,60 +18,70 @@ export default class App extends Component {
 
   fetchNetworks = async () => {
     var networks = await (await fetch("./inputs/networks.json")).json();
-    console.log("networks: ", networks);
 
-    this.setState(
-      (prevState) => ({
+    chrome.storage.sync.get(["_selectedNetwork"]).then((storage) => {
+      let selectedNetworkExists = networks.some(
+        (network) => network.name === storage._selectedNetwork.name
+      );
+      if (!selectedNetworkExists) {
+        storage._selectedNetwork = networks.length > 0 ? networks[0] : null;
+        chrome.storage.sync.set({
+          _selectedNetwork: storage._selectedNetwork,
+        });
+      }
+      this.setState((prevState) => ({
         ...prevState,
         networks: networks,
-      }),
-      () => {
-        if (this.state.networks.length > 0) {
-          this.setState((prevState) => ({
-            ...prevState,
-            selectedNetwork: this.state.networks[0],
-          }));
-        }
-      }
-    );
+        selectedNetwork: storage._selectedNetwork,
+      }));
+    });
   };
 
   fetchAccounts = async () => {
     var accounts = await (await fetch("./inputs/accounts.json")).json();
-    console.log("accounts: ", accounts);
 
-    this.setState(
-      (prevState) => ({
+    chrome.storage.sync.get(["_selectedAccount"]).then((storage) => {
+      let selectedAccountExists = accounts.some(
+        (account) => account.name === storage._selectedAccount.name
+      );
+      if (!selectedAccountExists) {
+        storage._selectedAccount = accounts.length > 0 ? accounts[0] : null;
+        chrome.storage.sync.set({
+          selectedAccount: storage._selectedAccount,
+        });
+      }
+      this.setState((prevState) => ({
         ...prevState,
         accounts: accounts,
-      }),
-      () => {
-        if (this.state.accounts.length > 0) {
-          this.setState((prevState) => ({
-            ...prevState,
-            selectedAccount: this.state.accounts[0],
-          }));
-        }
-      }
-    );
+        selectedAccount: storage._selectedAccount,
+      }));
+    });
   };
 
   refreshNetwork = async (selectedNetwork) => {
-    console.log("selectedNetwork: ", selectedNetwork);
-
-    this.setState((prevState) => ({
-      ...prevState,
-      selectedNetwork: selectedNetwork,
-    }));
+    chrome.storage.sync
+      .set({
+        _selectedNetwork: selectedNetwork,
+      })
+      .then(() => {
+        this.setState((prevState) => ({
+          ...prevState,
+          selectedNetwork: selectedNetwork,
+        }));
+      });
   };
 
   refreshAccount = async (selectedAccount) => {
-    console.log("selectedAccount: ", selectedAccount);
-
-    this.setState((prevState) => ({
-      ...prevState,
-      selectedAccount: selectedAccount,
-    }));
+    chrome.storage.sync
+      .set({
+        _selectedAccount: selectedAccount,
+      })
+      .then(() => {
+        this.setState((prevState) => ({
+          ...prevState,
+          selectedAccount: selectedAccount,
+        }));
+      });
   };
 
   async componentDidMount() {
@@ -106,9 +116,7 @@ export default class App extends Component {
                       color: "#FFFFFF",
                     }}
                   >
-                    {this.state.selectedNetwork
-                      ? this.state.selectedNetwork.name
-                      : "Network"}
+                    {this.state.selectedNetwork?.name || "Network"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     variant="dark"
@@ -137,9 +145,7 @@ export default class App extends Component {
                       color: "#FFFFFF",
                     }}
                   >
-                    {this.state.selectedAccount
-                      ? this.state.selectedAccount.name
-                      : "Account"}
+                    {this.state.selectedAccount?.name || "Account"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     variant="dark"

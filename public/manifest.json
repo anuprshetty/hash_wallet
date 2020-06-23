@@ -15,5 +15,6 @@
     },
     "default_title": "Hash Wallet",
     "default_popup": "index.html"
-  }
+  },
+  "permissions": ["storage"]
 }
