@@ -21,7 +21,7 @@ export default class App extends Component {
 
     chrome.storage.sync.get(["_selectedNetwork"]).then((storage) => {
       let selectedNetworkExists = networks.some(
-        (network) => network.name === storage._selectedNetwork.name
+        (network) => network.name === storage._selectedNetwork?.name
       );
       if (!selectedNetworkExists) {
         storage._selectedNetwork = networks.length > 0 ? networks[0] : null;
@@ -42,7 +42,7 @@ export default class App extends Component {
 
     chrome.storage.sync.get(["_selectedAccount"]).then((storage) => {
       let selectedAccountExists = accounts.some(
-        (account) => account.name === storage._selectedAccount.name
+        (account) => account.name === storage._selectedAccount?.name
       );
       if (!selectedAccountExists) {
         storage._selectedAccount = accounts.length > 0 ? accounts[0] : null;
