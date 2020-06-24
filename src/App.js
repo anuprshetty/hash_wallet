@@ -47,7 +47,7 @@ export default class App extends Component {
       if (!selectedAccountExists) {
         storage._selectedAccount = accounts.length > 0 ? accounts[0] : null;
         chrome.storage.sync.set({
-          selectedAccount: storage._selectedAccount,
+          _selectedAccount: storage._selectedAccount,
         });
       }
       this.setState((prevState) => ({
