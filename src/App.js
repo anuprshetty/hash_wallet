@@ -14,6 +14,11 @@ export default class App extends Component {
       accounts: [],
       selectedAccount: null,
     };
+
+    chrome.storage.sync.set({
+      _selectedNetwork: null,
+      _selectedAccount: null,
+    });
   }
 
   fetchNetworks = async () => {
@@ -35,6 +40,12 @@ export default class App extends Component {
         selectedNetwork: storage._selectedNetwork,
       }));
     });
+
+    // if (this.state.selectedNetwork) {
+    //   chrome.runtime.sendMessage({
+    //     selectedNetwork: this.state.selectedNetwork,
+    //   });
+    // }
   };
 
   fetchAccounts = async () => {
@@ -69,6 +80,8 @@ export default class App extends Component {
           selectedNetwork: selectedNetwork,
         }));
       });
+
+    // chrome.runtime.sendMessage({ selectedNetwork: selectedNetwork });
   };
 
   refreshAccount = async (selectedAccount) => {

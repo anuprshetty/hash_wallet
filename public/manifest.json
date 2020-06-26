@@ -5,16 +5,33 @@
   "version": "0.1.0",
   "description": "A crypto wallet for web3 development",
   "homepage_url": "https://github.com/anuprshetty/hash_wallet",
+  "icons": {
+    "16": "hash_wallet.png",
+    "24": "hash_wallet.png",
+    "32": "hash_wallet.png",
+    "48": "hash_wallet.png",
+    "128": "hash_wallet.png"
+  },
   "action": {
     "default_icon": {
       "16": "hash_wallet.png",
-      "24": "hash_wallet.png",
+      "19": "hash_wallet.png",
       "32": "hash_wallet.png",
-      "48": "hash_wallet.png",
-      "128": "hash_wallet.png"
+      "38": "hash_wallet.png",
+      "64": "hash_wallet.png",
+      "128": "hash_wallet.png",
+      "512": "hash_wallet.png"
     },
     "default_title": "Hash Wallet",
     "default_popup": "index.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "js": ["extension_scripts/content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
   "permissions": ["storage"]
 }
